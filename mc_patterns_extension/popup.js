@@ -9,7 +9,7 @@ window.onload=function(){
 function start(){
 	let msg = {
 		betreff:"start",
-		data:[],
+		data:[document.getElementById("width").value],
 		msg:"popup send start"
 	}
 	chrome.runtime.sendMessage(msg);

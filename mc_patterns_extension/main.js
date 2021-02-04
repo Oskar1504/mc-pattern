@@ -5,24 +5,20 @@ chrome.runtime.onMessage.addListener(
 		console.log("Message received: "+request.betreff);
 		if(request.betreff == "start"){
 			console.log("received start msg from background script")
-			grabData();
+			grabData(request.data);
 		}
 	}	
 );
 
-function grabData(){
+function grabData(size){
 
 	//array full of useelemts which contains pixel data / color starting top left
 	let pixels = document.getElementsByTagName("object")[0].getSVGDocument().getElementsByTagName("use");
-
-	//size of the pixelart
-	let size = document.getElementsByClassName("pattern_dimensions")[0].children[2].innerText.split("x");
 
 	let pattern = [],row = [],count = 0;
 	for(pixel of pixels){
 
 		if(count < size[0]){
-			console.log(count,size[0])
 			row.push(window.getComputedStyle(pixel).fill);
 		}else{
 			pattern.push(row);
